@@ -28,36 +28,55 @@ int main(int argc, const char * argv[])
         {   case 1 :
                 printf("Vous attaquez !\n");
                 gobelinPV -= 12;
-                printf("Le Gobelin attaque !\n");
-                herosPV -= 8;
-                printf("\nVous avez %d pv.\n", herosPV);
-                printf("Le Gobelin a %d pv.\n", gobelinPV);
                 break;
             case 2 :
                 printf("Vous récupérez 15 PV.\n");
                 herosPV += 15;
-                printf("Le Gobelin attaque !\n");
-                herosPV -= 8;
-                printf("\nVous avez %d pv.\n", herosPV);
-                printf("Le Gobelin a %d pv.\n", gobelinPV);
+                
+                if (herosPV > 50)
+                {
+                    herosPV = 50;
+                }
+               
                 break;
             case 3 :
                 printf("Vous ne faites rien.\n");
-                printf("Le Gobelin attaque !\n");
-                herosPV -= 8;
-                printf("\nVous avez %d pv.\n", herosPV);
-                printf("Le Gobelin a %d pv.\n", gobelinPV);
+                break;
+            default:
+                printf("Action invalide, vous perdez votre tour !\n");
                 break;
         }
+        
+        // L'attaque du gobelin (seulement s'il est encore en vie !)
+        
+        if (gobelinPV > 0)
+        {
+                printf("Le Gobelin vous attaque et inflige 8 degats !\n");
+                herosPV -= 8;
+        }
+        
+        if (herosPV < 0)
+        {
+            herosPV = 0;
+        }
+        
+        if (gobelinPV < 0)
+        {
+            gobelinPV = 0;
+        }
+        
+                // Affichage des stats à la fin du tour
+                printf("\n=> Vous avez %d PV.\n", herosPV);
+                printf("=> Le Gobelin a %d PV.\n", gobelinPV);
     }
     
     if (herosPV <= 0)
     {
-        printf("Vous avez perdu..\n"
+        printf("\nVous avez perdu..\n"
                "\n=== FIN ===");
     }
     else if (gobelinPV <= 0)
-    {  printf("Vous avez gagné !\n"
+    {  printf("\nVous avez gagné !\n"
               "\n=== FIN ===");
     }
     
